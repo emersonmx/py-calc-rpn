@@ -1,20 +1,19 @@
 import pytest
 
-from calculator import DefaultStack, InvalidOperandsError, Number, add
+from calculator import DefaultStack, Number, OperatorError, add
 
 
 def test_should_requires_two_numbers() -> None:
     stack = DefaultStack()
 
-    with pytest.raises(InvalidOperandsError):
+    with pytest.raises(OperatorError):
         add(stack)
 
     assert stack.size() == 0
-    assert stack.top() is None
 
     stack.push(Number(1))
 
-    with pytest.raises(InvalidOperandsError):
+    with pytest.raises(OperatorError):
         add(stack)
 
     assert stack.size() == 1

@@ -1,6 +1,6 @@
 import pytest
 
-from calculator import Calculator, Enter, InvalidOperandsError, Number, add
+from calculator import Calculator, Enter, Number, OperatorError, add
 
 
 def test_should_execute_operator() -> None:
@@ -19,6 +19,6 @@ def test_should_raises_exception_when_have_invalid_operands() -> None:
 
     calc.execute(Enter(Number(2)))
 
-    with pytest.raises(InvalidOperandsError):
+    with pytest.raises(OperatorError):
         calc.execute(add)
     assert calc.stack.size() == 1
