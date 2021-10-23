@@ -125,8 +125,8 @@ def divide(stack: Stack) -> None:
 
 
 class Calculator:
-    def __init__(self) -> None:
-        self.stack = DefaultStack()
+    def __init__(self, stack: Stack) -> None:
+        self.stack = stack
 
     def execute(self, operator: Operator) -> None:
         operator(self.stack)
