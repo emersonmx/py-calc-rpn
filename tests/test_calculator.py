@@ -3,7 +3,7 @@ import pytest
 from calculator import Calculator, Enter, InvalidOperandsError, Number, add
 
 
-def test_should_add_two_numbers() -> None:
+def test_should_execute_operator() -> None:
     calc = Calculator()
 
     calc.execute(Enter(Number(2)))
@@ -14,7 +14,7 @@ def test_should_add_two_numbers() -> None:
     assert calc.stack.size() == 1
 
 
-def test_should_requires_two_numbers_when_add() -> None:
+def test_should_raises_exception_when_have_invalid_operands() -> None:
     calc = Calculator()
 
     calc.execute(Enter(Number(2)))
@@ -22,15 +22,3 @@ def test_should_requires_two_numbers_when_add() -> None:
     with pytest.raises(InvalidOperandsError):
         calc.execute(add)
     assert calc.stack.size() == 1
-
-
-def test_should_pop_two_numbers_and_push_the_result_when_execute() -> None:
-    calc = Calculator()
-
-    calc.execute(Enter(Number(1)))
-    calc.execute(Enter(Number(2)))
-    calc.execute(Enter(Number(3)))
-    calc.execute(add)
-
-    assert calc.stack.size() == 2
-    assert list(calc.stack) == list(map(Number, [1, 5]))
