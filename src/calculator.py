@@ -9,20 +9,6 @@ class Number(float):
     pass
 
 
-class Error(Exception):
-    pass
-
-
-class EmptyStackError(Error):
-    pass
-
-
-class OperatorError(Error):
-    def __init__(self, operator: "Operator", stack: "list[Number]") -> None:
-        self.operator = operator
-        self.stack = stack
-
-
 class Stack(ABC):
     @abstractmethod
     def top(self) -> Number:
@@ -47,6 +33,20 @@ class Stack(ABC):
     @abstractmethod
     def __iter__(self) -> Iterator[Number]:
         ...
+
+
+class Error(Exception):
+    pass
+
+
+class EmptyStackError(Error):
+    pass
+
+
+class OperatorError(Error):
+    def __init__(self, operator: "Operator", stack: "list[Number]") -> None:
+        self.operator = operator
+        self.stack = stack
 
 
 class DefaultStack(Stack):
