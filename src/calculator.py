@@ -88,10 +88,20 @@ def add(stack: Stack) -> None:
     if stack.size() < 2:
         raise OperatorError(add, list(stack))
 
-    a = stack.pop()
     b = stack.pop()
+    a = stack.pop()
 
     stack.push(Number(a + b))
+
+
+def subtract(stack: Stack) -> None:
+    if stack.size() < 2:
+        raise OperatorError(add, list(stack))
+
+    b = stack.pop()
+    a = stack.pop()
+
+    stack.push(Number(a - b))
 
 
 class Calculator:
