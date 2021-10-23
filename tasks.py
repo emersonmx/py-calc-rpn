@@ -2,9 +2,9 @@ from invoke import Context, task
 
 
 @task
-def run(c):
-    # type: (Context) -> None
-    c.run("python src/main.py", pty=True)
+def run(c, backend="tui"):
+    # type: (Context, str) -> None
+    c.run(f"python src/entrypoint/{backend}/main.py", pty=True)
 
 
 @task(aliases=["fmt"])
