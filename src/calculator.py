@@ -114,6 +114,16 @@ def multiply(stack: Stack) -> None:
     stack.push(Number(a * b))
 
 
+def divide(stack: Stack) -> None:
+    if stack.size() < 2:
+        raise OperatorError(add, list(stack))
+
+    b = stack.pop()
+    a = stack.pop()
+
+    stack.push(Number(a / b))
+
+
 class Calculator:
     def __init__(self) -> None:
         self.stack = DefaultStack()
