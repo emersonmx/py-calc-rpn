@@ -24,7 +24,7 @@ def test_should_requires_two_numbers_when_add() -> None:
     assert calc.stack.size() == 1
 
 
-def test_should_pop_two_numbers_and_push_the_result_when_add() -> None:
+def test_should_pop_two_numbers_and_push_the_result_when_execute() -> None:
     calc = Calculator()
 
     calc.execute(Enter(Number(1)))
