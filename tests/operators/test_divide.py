@@ -2,7 +2,7 @@ import itertools
 
 import pytest
 
-from calculator import Number, OperatorError, Result, Stack, divide
+from calculator import Number, Operation, OperatorError, Result, Stack, divide
 
 DEFAULT_NUMBERS = itertools.product([-5, -1, 1, 5], repeat=2)
 
@@ -44,7 +44,7 @@ def test_should_divide_two_numbers(
 
     assert stack.size() == 1
     assert op_result == Result(
-        operation="divide",
+        operation=Operation.DIVIDE,
         operands=[na, nb],
         value=Number(result),
     )

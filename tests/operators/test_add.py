@@ -2,7 +2,7 @@ import itertools
 
 import pytest
 
-from calculator import Number, OperatorError, Result, Stack, add
+from calculator import Number, Operation, OperatorError, Result, Stack, add
 
 DEFAULT_NUMBERS = itertools.product([-5, -1, 0, -1, 5], repeat=2)
 
@@ -43,7 +43,7 @@ def test_should_add_two_numbers(
 
     assert stack.size() == 1
     assert op_result == Result(
-        operation="add",
+        operation=Operation.ADD,
         operands=[na, nb],
         value=Number(result),
     )

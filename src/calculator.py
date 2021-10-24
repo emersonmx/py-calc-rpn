@@ -1,20 +1,13 @@
 from abc import ABC, abstractmethod
 from dataclasses import dataclass
+from enum import Enum
 from typing import Callable, Iterator
 
 Operator = Callable[["Stack"], "Result"]
-Operation = str
 
 
 class Number(float):
     pass
-
-
-@dataclass(frozen=True)
-class Result:
-    operation: Operation
-    operands: list["Number"]
-    value: "Number"
 
 
 class Stack(ABC):
@@ -52,9 +45,14 @@ class EmptyStackError(Error):
 
 
 class OperatorError(Error):
-    def __init__(self, operator: "Operator", stack: "list[Number]") -> None:
+    def __init__(self, operator: "Operator", stack: list[Number]) -> None:
         self.operator = operator
         self.stack = stack
+
+
+class InvalidCommandError(Error):
+    def __init__(self, operation: "Operation", stack: list[Number]) -> None:
+        self.operation = operation
 
 
 class DefaultStack(Stack):
@@ -84,21 +82,17 @@ class DefaultStack(Stack):
         return iter(self.stack)
 
 
-@dataclass(frozen=True)
-class Enter:
-    value: Number
+class Operation(str, Enum):
+    ADD = "add"
+    SUBTRACT = "subtract"
+    MULTIPLY = "multiply"
+    DIVIDE = "divide"
 
-    def __call__(self, stack: Stack) -> Result:
-        stack.push(self.value)
-
-        return Result(
-            operation="enter",
-            operands=[self.value],
-            value=self.value,
-        )
+    def __str__(self) -> str:
+        return self.value
 
 
-def add(stack: Stack) -> Result:
+def add(stack: Stack) -> "Result":
     if stack.size() < 2:
         raise OperatorError(add, list(stack))
 
@@ -109,13 +103,13 @@ def add(stack: Stack) -> Result:
     stack.push(result_value)
 
     return Result(
-        operation="add",
+        operation=Operation.ADD,
         operands=[a, b],
         value=result_value,
     )
 
 
-def subtract(stack: Stack) -> Result:
+def subtract(stack: Stack) -> "Result":
     if stack.size() < 2:
         raise OperatorError(add, list(stack))
 
@@ -126,13 +120,13 @@ def subtract(stack: Stack) -> Result:
     stack.push(result_value)
 
     return Result(
-        operation="subtract",
+        operation=Operation.SUBTRACT,
         operands=[a, b],
         value=result_value,
     )
 
 
-def multiply(stack: Stack) -> Result:
+def multiply(stack: Stack) -> "Result":
     if stack.size() < 2:
         raise OperatorError(add, list(stack))
 
@@ -143,13 +137,13 @@ def multiply(stack: Stack) -> Result:
     stack.push(result_value)
 
     return Result(
-        operation="multiply",
+        operation=Operation.MULTIPLY,
         operands=[a, b],
         value=result_value,
     )
 
 
-def divide(stack: Stack) -> Result:
+def divide(stack: Stack) -> "Result":
     if stack.size() < 2:
         raise OperatorError(add, list(stack))
 
@@ -160,15 +154,29 @@ def divide(stack: Stack) -> Result:
     stack.push(result_value)
 
     return Result(
-        operation="divide",
+        operation=Operation.DIVIDE,
         operands=[a, b],
         value=result_value,
     )
+
+
+@dataclass(frozen=True)
+class Result:
+    operation: Operation
+    operands: list[float]
+    value: float
 
 
 class Calculator:
     def __init__(self, stack: Stack) -> None:
         self.stack = stack
 
-    def execute(self, operator: Operator) -> Result:
-        return operator(self.stack)
+    def enter(self, number: float) -> None:
+        self.stack.push(Number(number))
+
+    def execute(self, operation: Operation) -> Result:
+        try:
+            operator: Operator = globals()[operation]
+            return operator(self.stack)
+        except KeyError:
+            raise InvalidCommandError(operation, list(self.stack))

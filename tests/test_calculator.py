@@ -1,18 +1,16 @@
 import pytest
 
-from calculator import Calculator, Enter, Number, OperatorError, Result, add
+from calculator import Calculator, Number, Operation, OperatorError, Result
 
 
 def test_should_execute_operator(calculator: Calculator) -> None:
-    na = Number(2)
-    nb = Number(2)
-    calculator.execute(Enter(na))
-    calculator.execute(Enter(nb))
-    result = calculator.execute(add)
+    calculator.enter(2)
+    calculator.enter(2)
+    result = calculator.execute(Operation.ADD)
 
     assert result == Result(
-        operation="add",
-        operands=[na, nb],
+        operation=Operation.ADD,
+        operands=[Number(2), Number(2)],
         value=Number(4),
     )
 
@@ -20,8 +18,8 @@ def test_should_execute_operator(calculator: Calculator) -> None:
 def test_should_raises_exception_when_have_invalid_operands(
     calculator: Calculator,
 ) -> None:
-    calculator.execute(Enter(Number(2)))
+    calculator.enter(2)
 
     with pytest.raises(OperatorError):
-        calculator.execute(add)
+        calculator.execute(Operation.ADD)
     assert calculator.stack.size() == 1
