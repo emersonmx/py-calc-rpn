@@ -2,14 +2,12 @@ import itertools
 
 import pytest
 
-from calculator import DefaultStack, Number, OperatorError, divide
+from calculator import Number, OperatorError, Stack, divide
 
 DEFAULT_NUMBERS = itertools.product([-5, -1, 1, 5], repeat=2)
 
 
-def test_should_requires_two_numbers() -> None:
-    stack = DefaultStack()
-
+def test_should_requires_two_numbers(stack: Stack) -> None:
     with pytest.raises(OperatorError):
         divide(stack)
 
@@ -31,9 +29,12 @@ def test_should_requires_two_numbers() -> None:
         (0, 1, 0),
     ],
 )
-def test_should_divide_two_numbers(a: int, b: int, result: int) -> None:
-    stack = DefaultStack()
-
+def test_should_divide_two_numbers(
+    a: int,
+    b: int,
+    result: int,
+    stack: Stack,
+) -> None:
     stack.push(Number(a))
     stack.push(Number(b))
 
@@ -43,9 +44,7 @@ def test_should_divide_two_numbers(a: int, b: int, result: int) -> None:
     assert stack.top() == Number(result)
 
 
-def test_should_raise_error_when_division_by_zero() -> None:
-    stack = DefaultStack()
-
+def test_should_raise_error_when_division_by_zero(stack: Stack) -> None:
     stack.push(Number(1))
     stack.push(Number(0))
 
@@ -53,9 +52,7 @@ def test_should_raise_error_when_division_by_zero() -> None:
         divide(stack)
 
 
-def test_should_pop_two_numbers_and_push_the_result() -> None:
-    stack = DefaultStack()
-
+def test_should_pop_two_numbers_and_push_the_result(stack: Stack) -> None:
     stack.push(Number(1))
     stack.push(Number(2))
     stack.push(Number(3))
