@@ -2,7 +2,7 @@ import itertools
 
 import pytest
 
-from calculator import Number, OperatorError, Stack, subtract
+from calculator import Number, OperatorError, Result, Stack, subtract
 
 DEFAULT_NUMBERS = itertools.product([-5, -1, 0, -1, 5], repeat=2)
 
@@ -29,18 +29,24 @@ def test_should_requires_two_numbers(stack: Stack) -> None:
     ],
 )
 def test_should_subtract_two_numbers(
-    a: int,
-    b: int,
-    result: int,
+    a: float,
+    b: float,
+    result: float,
     stack: Stack,
 ) -> None:
-    stack.push(Number(a))
-    stack.push(Number(b))
+    na = Number(a)
+    nb = Number(b)
+    stack.push(na)
+    stack.push(nb)
 
-    subtract(stack)
+    op_result = subtract(stack)
 
     assert stack.size() == 1
-    assert stack.top() == Number(result)
+    assert op_result == Result(
+        operation="subtract",
+        operands=[na, nb],
+        value=Number(result),
+    )
 
 
 def test_should_pop_two_numbers_and_push_the_result(stack: Stack) -> None:

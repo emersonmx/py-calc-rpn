@@ -2,11 +2,19 @@ from abc import ABC, abstractmethod
 from dataclasses import dataclass
 from typing import Callable, Iterator
 
-Operator = Callable[["Stack"], None]
+Operator = Callable[["Stack"], "Result"]
+Operation = str
 
 
 class Number(float):
     pass
+
+
+@dataclass(frozen=True)
+class Result:
+    operation: Operation
+    operands: list["Number"]
+    value: "Number"
 
 
 class Stack(ABC):
@@ -80,53 +88,87 @@ class DefaultStack(Stack):
 class Enter:
     value: Number
 
-    def __call__(self, stack: Stack) -> None:
+    def __call__(self, stack: Stack) -> Result:
         stack.push(self.value)
 
+        return Result(
+            operation="enter",
+            operands=[self.value],
+            value=self.value,
+        )
 
-def add(stack: Stack) -> None:
+
+def add(stack: Stack) -> Result:
     if stack.size() < 2:
         raise OperatorError(add, list(stack))
 
     b = stack.pop()
     a = stack.pop()
 
-    stack.push(Number(a + b))
+    result_value = Number(a + b)
+    stack.push(result_value)
+
+    return Result(
+        operation="add",
+        operands=[a, b],
+        value=result_value,
+    )
 
 
-def subtract(stack: Stack) -> None:
+def subtract(stack: Stack) -> Result:
     if stack.size() < 2:
         raise OperatorError(add, list(stack))
 
     b = stack.pop()
     a = stack.pop()
 
-    stack.push(Number(a - b))
+    result_value = Number(a - b)
+    stack.push(result_value)
+
+    return Result(
+        operation="subtract",
+        operands=[a, b],
+        value=result_value,
+    )
 
 
-def multiply(stack: Stack) -> None:
+def multiply(stack: Stack) -> Result:
     if stack.size() < 2:
         raise OperatorError(add, list(stack))
 
     b = stack.pop()
     a = stack.pop()
 
-    stack.push(Number(a * b))
+    result_value = Number(a * b)
+    stack.push(result_value)
+
+    return Result(
+        operation="multiply",
+        operands=[a, b],
+        value=result_value,
+    )
 
 
-def divide(stack: Stack) -> None:
+def divide(stack: Stack) -> Result:
     if stack.size() < 2:
         raise OperatorError(add, list(stack))
 
     b = stack.pop()
     a = stack.pop()
 
-    stack.push(Number(a / b))
+    result_value = Number(a / b)
+    stack.push(result_value)
+
+    return Result(
+        operation="divide",
+        operands=[a, b],
+        value=result_value,
+    )
 
 
 class Calculator:
     def __init__(self, stack: Stack) -> None:
         self.stack = stack
 
-    def execute(self, operator: Operator) -> None:
-        operator(self.stack)
+    def execute(self, operator: Operator) -> Result:
+        return operator(self.stack)
