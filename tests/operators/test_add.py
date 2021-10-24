@@ -2,7 +2,8 @@ import itertools
 
 import pytest
 
-from calculator import Number, Operation, OperatorError, Result, Stack, add
+from domain import Number, Stack
+from service import Operation, OperatorError, Result, add
 
 DEFAULT_NUMBERS = itertools.product([-5, -1, 0, -1, 5], repeat=2)
 

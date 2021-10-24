@@ -1,6 +1,7 @@
 import pytest
 
-from calculator import Calculator, Number, Operation, OperatorError, Result
+from domain import Number
+from service import Calculator, Operation, OperatorError, Result
 
 
 def test_should_execute_operator(calculator: Calculator) -> None:

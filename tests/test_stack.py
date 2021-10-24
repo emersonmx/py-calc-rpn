@@ -1,6 +1,7 @@
 import pytest
 
-from calculator import EmptyStackError, Number, Stack
+from domain import Number, Stack
+from errors import EmptyStackError
 
 
 def test_should_raise_error_on_top_when_empty(stack: Stack) -> None:

@@ -1,6 +1,8 @@
 import pytest
 
-from calculator import Calculator, DefaultStack, Stack
+from adapters import DefaultStack
+from domain import Stack
+from service import Calculator
 
 
 @pytest.fixture
