@@ -1,10 +1,10 @@
 from typing import Iterator
 
-from domain import Number, Stack
+from domain import Number
 from errors import EmptyStackError
 
 
-class DefaultStack(Stack):
+class DefaultStack:
     def __init__(self) -> None:
         self.stack: list[Number] = []
 
