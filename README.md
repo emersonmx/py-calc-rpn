@@ -1,3 +1,3 @@
-# Calculator
+# Calculadora
 
-Este projeto de calculador usando os conceitos de arquitetura limpa.
+Este é um projeto de calculadora usando os conceitos de arquitetura limpa.
