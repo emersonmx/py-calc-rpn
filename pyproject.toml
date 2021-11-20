@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "calculator"
+name = "py-calc-rpn"
 version = "0.1.0"
 description = ""
 authors = ["Emerson MX <emersonmx@gmail.com>"]
