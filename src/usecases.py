@@ -1,6 +1,6 @@
 from typing import Protocol
 
-import domain
+import entities
 
 
 class EnterNumber(Protocol):
@@ -41,21 +41,21 @@ class MemoryOutput(Protocol):
 class EnterNumberInteractor:
     def __init__(
         self,
-        stack: domain.Stack,
+        stack: entities.Stack,
         memory_output: MemoryOutput,
     ) -> None:
         self._stack = stack
         self._output_memory = memory_output
 
     def __call__(self, number: float) -> None:
-        self._stack.push(domain.Number(number))
+        self._stack.push(entities.Number(number))
         self._output_memory(list(self._stack))
 
 
 class ExecuteOperatorInteractor:
     def __init__(
         self,
-        stack: domain.Stack,
+        stack: entities.Stack,
         result_output: ResultOuput,
         memory_output: MemoryOutput,
     ) -> None:
@@ -64,7 +64,7 @@ class ExecuteOperatorInteractor:
         self._output_memory = memory_output
 
     def __call__(self, operator: str) -> None:
-        operator_handler: domain.Operator = getattr(domain, operator)
+        operator_handler: entities.Operator = getattr(entities, operator)
         result = operator_handler(self._stack)
         self._output_result(result.operator, result.operands, result.value)
         self._output_memory(list(self._stack))
@@ -73,7 +73,7 @@ class ExecuteOperatorInteractor:
 class ShowMemoryInteractor:
     def __init__(
         self,
-        stack: domain.Stack,
+        stack: entities.Stack,
         memory_output: MemoryOutput,
     ) -> None:
         self._stack = stack
@@ -86,7 +86,7 @@ class ShowMemoryInteractor:
 class ClearMemoryInteractor:
     def __init__(
         self,
-        stack: domain.Stack,
+        stack: entities.Stack,
         memory_output: MemoryOutput,
     ) -> None:
         self._stack = stack

@@ -1,6 +1,7 @@
+from typing import Any
 from unittest import mock
 
-from domain import Stack
+from entities import Stack
 from usecases import (
     ClearMemoryInteractor,
     EnterNumberInteractor,
@@ -45,7 +46,7 @@ def make_clear_memory_interactor(stack: Stack) -> ClearMemoryInteractor:
 
 def test_should_enter_a_number(stack: Stack) -> None:
     interactor = make_enter_number_interactor(stack)
-    mocked_memory_output: mock.MagicMock = interactor._output_memory
+    mocked_memory_output: Any = interactor._output_memory
 
     assert stack.size() == 0
 
@@ -59,8 +60,8 @@ def test_should_enter_a_number(stack: Stack) -> None:
 def test_should_execute_operator(stack: Stack) -> None:
     enter_number_interactor = make_enter_number_interactor(stack)
     interactor = make_execute_operator_interactor(stack)
-    mocked_result_output: mock.MagicMock = interactor._output_result
-    mocked_memory_output: mock.MagicMock = interactor._output_memory
+    mocked_result_output: Any = interactor._output_result
+    mocked_memory_output: Any = interactor._output_memory
 
     assert stack.size() == 0
 
@@ -77,7 +78,7 @@ def test_should_execute_operator(stack: Stack) -> None:
 def test_should_show_memory(stack: Stack) -> None:
     enter_number_interactor = make_enter_number_interactor(stack)
     interactor = make_show_memory_interactor(stack)
-    mocked_memory_output: mock.MagicMock = interactor._output_memory
+    mocked_memory_output: Any = interactor._output_memory
 
     assert stack.size() == 0
 
@@ -93,7 +94,7 @@ def test_should_show_memory(stack: Stack) -> None:
 def test_should_clear_memory(stack: Stack) -> None:
     enter_number_interactor = make_enter_number_interactor(stack)
     interactor = make_clear_memory_interactor(stack)
-    mocked_memory_output: mock.MagicMock = interactor._output_memory
+    mocked_memory_output: Any = interactor._output_memory
 
     assert stack.size() == 0
 

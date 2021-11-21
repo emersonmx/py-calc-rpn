@@ -1,6 +1,6 @@
 import pytest
 
-from domain import Stack
+from entities import Stack
 
 
 @pytest.fixture

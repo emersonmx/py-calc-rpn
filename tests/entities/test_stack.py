@@ -1,6 +1,6 @@
 import pytest
 
-from domain import EmptyStackError, Number, Stack
+from entities import EmptyStackError, Number, Stack
 
 
 def test_should_raise_error_on_top_when_empty(stack: Stack) -> None:
