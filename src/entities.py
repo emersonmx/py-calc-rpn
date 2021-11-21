@@ -42,23 +42,23 @@ class Stack:
 
 @dataclass(frozen=True)
 class Result:
-    operator: str
+    operation: str
     operands: list[float]
     value: float
 
 
-Operator = Callable[[Stack], Result]
+Operation = Callable[[Stack], Result]
 
 
-class OperatorError(Error):
-    def __init__(self, operator: Operator, stack: list[Number]) -> None:
-        self.operator = operator
+class OperationError(Error):
+    def __init__(self, operation: Operation, stack: list[Number]) -> None:
+        self.operation = operation
         self.stack = stack
 
 
 def add(stack: Stack) -> Result:
     if stack.size() < 2:
-        raise OperatorError(add, list(stack))
+        raise OperationError(add, list(stack))
 
     b = stack.pop()
     a = stack.pop()
@@ -67,7 +67,7 @@ def add(stack: Stack) -> Result:
     stack.push(result_value)
 
     return Result(
-        operator="add",
+        operation="add",
         operands=[a, b],
         value=result_value,
     )
@@ -75,7 +75,7 @@ def add(stack: Stack) -> Result:
 
 def subtract(stack: Stack) -> Result:
     if stack.size() < 2:
-        raise OperatorError(add, list(stack))
+        raise OperationError(add, list(stack))
 
     b = stack.pop()
     a = stack.pop()
@@ -84,7 +84,7 @@ def subtract(stack: Stack) -> Result:
     stack.push(result_value)
 
     return Result(
-        operator="subtract",
+        operation="subtract",
         operands=[a, b],
         value=result_value,
     )
@@ -92,7 +92,7 @@ def subtract(stack: Stack) -> Result:
 
 def multiply(stack: Stack) -> Result:
     if stack.size() < 2:
-        raise OperatorError(add, list(stack))
+        raise OperationError(add, list(stack))
 
     b = stack.pop()
     a = stack.pop()
@@ -101,7 +101,7 @@ def multiply(stack: Stack) -> Result:
     stack.push(result_value)
 
     return Result(
-        operator="multiply",
+        operation="multiply",
         operands=[a, b],
         value=result_value,
     )
@@ -109,7 +109,7 @@ def multiply(stack: Stack) -> Result:
 
 def divide(stack: Stack) -> Result:
     if stack.size() < 2:
-        raise OperatorError(add, list(stack))
+        raise OperationError(add, list(stack))
 
     b = stack.pop()
     a = stack.pop()
@@ -118,7 +118,7 @@ def divide(stack: Stack) -> Result:
     stack.push(result_value)
 
     return Result(
-        operator="divide",
+        operation="divide",
         operands=[a, b],
         value=result_value,
     )

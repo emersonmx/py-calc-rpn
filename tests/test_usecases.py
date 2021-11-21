@@ -5,7 +5,7 @@ from entities import Stack
 from usecases import (
     ClearMemoryInteractor,
     EnterNumberInteractor,
-    ExecuteOperatorInteractor,
+    ExecuteOperationInteractor,
     ShowMemoryInteractor,
 )
 
@@ -18,10 +18,12 @@ def make_enter_number_interactor(stack: Stack) -> EnterNumberInteractor:
     )
 
 
-def make_execute_operator_interactor(stack: Stack) -> ExecuteOperatorInteractor:
+def make_execute_operation_interactor(
+    stack: Stack,
+) -> ExecuteOperationInteractor:
     mocked_result_output = mock.MagicMock()
     mocked_memory_output = mock.MagicMock()
-    return ExecuteOperatorInteractor(
+    return ExecuteOperationInteractor(
         stack,
         mocked_result_output,
         mocked_memory_output,
@@ -57,9 +59,9 @@ def test_should_enter_a_number(stack: Stack) -> None:
     mocked_memory_output.assert_called_with([2])
 
 
-def test_should_execute_operator(stack: Stack) -> None:
+def test_should_execute_operation(stack: Stack) -> None:
     enter_number_interactor = make_enter_number_interactor(stack)
-    interactor = make_execute_operator_interactor(stack)
+    interactor = make_execute_operation_interactor(stack)
     mocked_result_output: Any = interactor._output_result
     mocked_memory_output: Any = interactor._output_memory
 

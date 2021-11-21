@@ -4,37 +4,37 @@ import entities
 
 
 class EnterNumber(Protocol):
-    def __call__(self, number: float) -> None:
+    def __call__(self, number: float) -> None:  # pragma: no cover
         ...
 
 
-class ExecuteOperator(Protocol):
-    def __call__(self, operator: str) -> None:
+class ExecuteOperation(Protocol):
+    def __call__(self, operation: str) -> None:  # pragma: no cover
         ...
 
 
 class ShowMemory(Protocol):
-    def __call__(self) -> None:
+    def __call__(self) -> None:  # pragma: no cover
         ...
 
 
 class ClearMemory(Protocol):
-    def __call__(self) -> None:
+    def __call__(self) -> None:  # pragma: no cover
         ...
 
 
 class ResultOuput(Protocol):
     def __call__(
         self,
-        operator: str,
+        operation: str,
         operands: list[float],
         result: float,
-    ) -> None:
+    ) -> None:  # pragma: no cover
         ...
 
 
 class MemoryOutput(Protocol):
-    def __call__(self, memory: list[float]) -> None:
+    def __call__(self, memory: list[float]) -> None:  # pragma: no cover
         ...
 
 
@@ -52,7 +52,7 @@ class EnterNumberInteractor:
         self._output_memory(list(self._stack))
 
 
-class ExecuteOperatorInteractor:
+class ExecuteOperationInteractor:
     def __init__(
         self,
         stack: entities.Stack,
@@ -63,10 +63,10 @@ class ExecuteOperatorInteractor:
         self._output_result = result_output
         self._output_memory = memory_output
 
-    def __call__(self, operator: str) -> None:
-        operator_handler: entities.Operator = getattr(entities, operator)
-        result = operator_handler(self._stack)
-        self._output_result(result.operator, result.operands, result.value)
+    def __call__(self, operation: str) -> None:
+        operation_handler: entities.Operation = getattr(entities, operation)
+        result = operation_handler(self._stack)
+        self._output_result(result.operation, result.operands, result.value)
         self._output_memory(list(self._stack))
 
 

@@ -2,20 +2,20 @@ import itertools
 
 import pytest
 
-from entities import Number, OperatorError, Result, Stack, multiply
+from entities import Number, OperationError, Result, Stack, multiply
 
 DEFAULT_NUMBERS = itertools.product([-5, -1, 0, -1, 5], repeat=2)
 
 
 def test_should_requires_two_numbers(stack: Stack) -> None:
-    with pytest.raises(OperatorError):
+    with pytest.raises(OperationError):
         multiply(stack)
 
     assert stack.size() == 0
 
     stack.push(Number(1))
 
-    with pytest.raises(OperatorError):
+    with pytest.raises(OperationError):
         multiply(stack)
 
     assert stack.size() == 1
@@ -43,7 +43,7 @@ def test_should_multiply_two_numbers(
 
     assert stack.size() == 1
     assert op_result == Result(
-        operator="multiply",
+        operation="multiply",
         operands=[na, nb],
         value=Number(result),
     )
