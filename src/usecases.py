@@ -4,22 +4,22 @@ import entities
 
 
 class EnterNumber(Protocol):
-    def __call__(self, number: float) -> None:  # pragma: no cover
+    def __call__(self, number: float) -> None:
         ...
 
 
 class ExecuteOperation(Protocol):
-    def __call__(self, operation: str) -> None:  # pragma: no cover
+    def __call__(self, operation: str) -> None:
         ...
 
 
 class ShowMemory(Protocol):
-    def __call__(self) -> None:  # pragma: no cover
+    def __call__(self) -> None:
         ...
 
 
 class ClearMemory(Protocol):
-    def __call__(self) -> None:  # pragma: no cover
+    def __call__(self) -> None:
         ...
 
 
@@ -29,12 +29,12 @@ class ResultOuput(Protocol):
         operation: str,
         operands: list[float],
         result: float,
-    ) -> None:  # pragma: no cover
+    ) -> None:
         ...
 
 
 class MemoryOutput(Protocol):
-    def __call__(self, memory: list[float]) -> None:  # pragma: no cover
+    def __call__(self, memory: list[float]) -> None:
         ...
 
 
