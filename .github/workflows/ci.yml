@@ -26,7 +26,7 @@ jobs:
         poetry install
     - name: Analize code
       run: |
-        poetry run invoke check --all
+        poetry run invoke check --all-files
     - name: Test code
       run: |
         poetry run invoke tests
