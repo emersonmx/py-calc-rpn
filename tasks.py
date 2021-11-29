@@ -4,7 +4,7 @@ from invoke import Context, task
 @task
 def run(c, backend="tui"):
     # type: (Context, str) -> None
-    c.run(f"python src/entrypoint/{backend}/main.py", pty=True)
+    c.run(f"python src/entrypoint/{backend}/main.py")
 
 
 @task(aliases=["fmt"])
@@ -24,7 +24,7 @@ def format(c, all_files=False):
     ]
     for hook in hooks:
         cmd = " ".join(["pre-commit", "run", *precommit_options, hook])
-        c.run(cmd, pty=True)
+        c.run(cmd)
 
 
 @task
@@ -43,7 +43,7 @@ def lint(c, all_files=False):
     ]
     for hook in hooks:
         cmd = " ".join(["pre-commit", "run", *precommit_options, hook])
-        c.run(cmd, pty=True)
+        c.run(cmd)
 
 
 @task
@@ -55,7 +55,7 @@ def check(c, all_files=False):
         precommit_options.append("--all-files")
 
     cmd = " ".join(["pre-commit", "run", *precommit_options])
-    c.run(cmd, pty=True)
+    c.run(cmd)
 
 
 @task
@@ -77,10 +77,10 @@ def tests(c, quiet=False):
             "tests/",
         ],
     )
-    c.run(cmd, pty=True)
+    c.run(cmd)
 
 
 @task
 def coverage(c):
     # type: (Context) -> None
-    c.run("coverage report", pty=True)
+    c.run("coverage report")
