@@ -68,7 +68,6 @@ def tests(c, quiet=False):
 
     cmd = " ".join(
         [
-            "PYTHONPATH=src/",
             "coverage",
             "run",
             "-m",
