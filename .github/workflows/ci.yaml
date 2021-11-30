@@ -1,16 +1,15 @@
-name: CI
+name: CI Workflow
 
 on: [push]
 
 jobs:
-  ci:
+  workflow:
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
       matrix:
         python-version: ["3.10"]
         os: [ubuntu-latest, macos-latest, windows-latest]
-        poetry-version: ["1.1.12"]
     env:
       PYTHONPATH: src/
     steps:
@@ -21,12 +20,10 @@ jobs:
         python-version: ${{ matrix.python-version }}
     - name: Set up Poetry
       uses: abatilo/actions-poetry@v2.0.0
-      with:
-        poetry-version: ${{ matrix.poetry-version }}
     - name: Install dependencies
       run: |
         poetry install
-    - name: Analize code
+    - name: Analize code quality
       run: |
         poetry run invoke check --all-files
     - name: Test code
