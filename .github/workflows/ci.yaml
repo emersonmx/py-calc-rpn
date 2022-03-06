@@ -23,7 +23,7 @@ jobs:
     - name: Install dependencies
       run: |
         poetry install
-    - name: Analize code quality
+    - name: Check code quality
       run: |
         poetry run invoke check --all-files
     - name: Test code
