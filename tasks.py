@@ -24,7 +24,7 @@ def format(c, all_files=False):
     ]
     for hook in hooks:
         cmd = " ".join(["pre-commit", "run", *precommit_options, hook])
-        c.run(cmd)
+        c.run(cmd, pty=True)
 
 
 @task
@@ -43,7 +43,7 @@ def lint(c, all_files=False):
     ]
     for hook in hooks:
         cmd = " ".join(["pre-commit", "run", *precommit_options, hook])
-        c.run(cmd)
+        c.run(cmd, pty=True)
 
 
 @task
@@ -55,7 +55,7 @@ def check(c, all_files=False):
         precommit_options.append("--all-files")
 
     cmd = " ".join(["pre-commit", "run", *precommit_options])
-    c.run(cmd)
+    c.run(cmd, pty=True)
 
 
 @task
@@ -68,12 +68,12 @@ def tests(c, quiet=False):
 
     cmd = " ".join(
         [
+            "PYTHONPATH=src/",
             "coverage",
             "run",
             "-m",
             "pytest",
             *pytest_options,
-            "tests/",
         ],
     )
     c.run(cmd)
