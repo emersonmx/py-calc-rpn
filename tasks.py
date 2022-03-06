@@ -4,7 +4,7 @@ from invoke import Context, task
 @task
 def run(c, backend="tui"):
     # type: (Context, str) -> None
-    c.run(f"python src/entrypoint/{backend}/main.py")
+    c.run(f"python src/entrypoint/{backend}/main.py", pty=True)
 
 
 @task(aliases=["fmt"])
@@ -76,10 +76,10 @@ def tests(c, quiet=False):
             *pytest_options,
         ],
     )
-    c.run(cmd)
+    c.run(cmd, pty=True)
 
 
 @task
 def coverage(c):
     # type: (Context) -> None
-    c.run("coverage report")
+    c.run("coverage report", pty=True)
