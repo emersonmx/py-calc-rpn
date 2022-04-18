@@ -8,7 +8,7 @@ authors = ["Emerson MX <emersonmx@gmail.com>"]
 python = "^3.10"
 
 [tool.poetry.dev-dependencies]
-add-trailing-comma = "^2.2.1"
+add-trailing-comma = "^2.2.3"
 black = "^22.1"
 isort = "^5.10.1"
 types-all = "^1.0.0"

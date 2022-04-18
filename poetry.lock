@@ -1,10 +1,10 @@
 [[package]]
 name = "add-trailing-comma"
-version = "2.2.1"
+version = "2.2.3"
 description = "Automatically add trailing commas to calls and literals"
 category = "dev"
 optional = false
-python-versions = ">=3.6.1"
+python-versions = ">=3.7"
 
 [package.dependencies]
 tokenize-rt = ">=3.0.1"
@@ -1574,12 +1574,12 @@ python-versions = "*"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.10"
-content-hash = "bfa5f0f45a3af57144afe1b0c37d7f4028be23ed1fec230ad92177140c7c008d"
+content-hash = "0116d906d989d1135235c754f251b29d88aaeeac55b696f92de7698cc06f739b"
 
 [metadata.files]
 add-trailing-comma = [
-    {file = "add_trailing_comma-2.2.1-py2.py3-none-any.whl", hash = "sha256:981c18282b38ec5bceab80ef11485440334d2a274fcf3fce1f91692374b6d818"},
-    {file = "add_trailing_comma-2.2.1.tar.gz", hash = "sha256:1640e97c4e85132633a6cb19b29e392dbaf9516292388afa685f7ef1012468e0"},
+    {file = "add_trailing_comma-2.2.3-py2.py3-none-any.whl", hash = "sha256:e8d928f8a31fc06140fa99802df0789b5f58c9b45b2a32252d7d4b59c46a9d03"},
+    {file = "add_trailing_comma-2.2.3.tar.gz", hash = "sha256:d118070060a40be1f6b7f0bcc2f7be3b9f88d22eb9511b5d7a6535fa9fa74571"},
 ]
 appnope = [
     {file = "appnope-0.1.2-py2.py3-none-any.whl", hash = "sha256:93aa393e9d6c54c5cd570ccadd8edad61ea0c4b9ea7a01409020c9aa019eb442"},
