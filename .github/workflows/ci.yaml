@@ -21,17 +21,19 @@ jobs:
       with:
         python-version: ${{ matrix.python-version }}
 
-    - uses: actions/cache@v3
+    - name: Setup poetry cache
+      uses: actions/cache@v3
       with:
         path: ~/.cache/pypoetry
         key: ${{ runner.os }}-python-${{ steps.setup-python.outputs.python-version }}-poetry-${{ hashFiles('poetry.lock') }}
 
-    - uses: actions/cache@v3
+    - name: Setup pre-commit cache
+      uses: actions/cache@v3
       with:
         path: ~/.cache/pre-commit
         key: ${{ runner.os }}-python-${{ steps.setup-python.outputs.python-version }}-precommit-${{ hashFiles('.pre-commit-config.yaml') }}
 
-    - name: Set up Poetry ${{matrix.poetry-version}}
+    - name: Setup poetry ${{matrix.poetry-version}}
       run: pip install poetry==${{matrix.poetry-version}}
 
     - name: Install dependencies
