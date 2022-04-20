@@ -28,6 +28,12 @@ jobs:
         path: ~/.cache/pypoetry
         key: ${{ runner.os }}-python-${{ steps.setup-python.outputs.python-version }}-poetry-${{ hashFiles('poetry.lock') }}
 
+    - name: Setup pip cache
+      uses: actions/cache@v3
+      with:
+        path: ~/.cache/pip
+        key: ${{ runner.os }}-python-${{ steps.setup-python.outputs.python-version }}-pip
+
     - name: Setup pre-commit cache
       uses: actions/cache@v3
       with:
