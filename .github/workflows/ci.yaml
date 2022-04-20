@@ -26,19 +26,19 @@ jobs:
       uses: actions/cache@v3
       with:
         path: ~/.cache/pypoetry
-        key: ${{ runner.os }}-python-${{ steps.setup-python.outputs.python-version }}-poetry-${{ hashFiles('poetry.lock') }}
+        key: ${{ runner.os }}-python-${{ matrix.python-version }}-poetry-${{ hashFiles('poetry.lock') }}
 
     - name: Setup pip cache
       uses: actions/cache@v3
       with:
         path: ~/.cache/pip
-        key: ${{ runner.os }}-python-${{ steps.setup-python.outputs.python-version }}-pip
+        key: ${{ runner.os }}-python-${{ matrix.python-version }}-pip
 
     - name: Setup pre-commit cache
       uses: actions/cache@v3
       with:
         path: ~/.cache/pre-commit
-        key: ${{ runner.os }}-python-${{ steps.setup-python.outputs.python-version }}-precommit-${{ hashFiles('.pre-commit-config.yaml') }}
+        key: ${{ runner.os }}-python-${{ matrix.python-version }}-precommit-${{ hashFiles('.pre-commit-config.yaml') }}
 
     - name: Setup poetry ${{matrix.poetry-version}}
       run: pip install poetry==${{matrix.poetry-version}}
