@@ -8,22 +8,21 @@ authors = ["Emerson MX <emersonmx@gmail.com>"]
 python = "^3.10"
 
 [tool.poetry.dev-dependencies]
-add-trailing-comma = "^2.2.1"
-black = "^22.1"
+add-trailing-comma = "^2.2.3"
+black = "^22.3.0"
 isort = "^5.10.1"
 types-all = "^1.0.0"
 flake8 = "^4.0.1"
 flake8-print = "^4.0.0"
 pep8-naming = "^0.12.1"
-mypy = "^0.941"
+mypy = "^0.942"
 vulture = "^2.3"
 bandit = "^1.7.4"
 pytest = "^7.1.1"
-pytest-asyncio = "^0.18.1"
-coverage = "^6.3"
+coverage = "^6.3.2"
 ipdb = "^0.13.9"
 invoke = "^1.7.0"
-pre-commit = "^2.17.0"
+pre-commit = "^2.18.1"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
@@ -69,10 +68,7 @@ disallow_any_unimported = false
 disallow_untyped_decorators = false
 
 [tool.pytest.ini_options]
-asyncio_mode = "auto"
-testpaths = [
-    "tests",
-]
+testpaths = ["tests"]
 
 [tool.vulture]
 min_confidence = 100
@@ -84,13 +80,13 @@ source = ["src/"]
 [tool.coverage.report]
 fail_under = 100
 exclude_lines = [
-    "pragma: no cover",
-    "def __repr__",
-    "if self\\.debug",
-    "raise AssertionError",
-    "raise NotImplementedError",
-    "if 0:",
-    "if __name__ == .__main__.:",
-    "class .*\\bProtocol\\):",
-    "@(abc\\.)?abstractmethod",
+  "pragma: no cover",
+  "def __repr__",
+  "if self\\.debug",
+  "raise AssertionError",
+  "raise NotImplementedError",
+  "if 0:",
+  "if __name__ == .__main__.:",
+  "class .*\\bProtocol\\):",
+  "@(abc\\.)?abstractmethod",
 ]
