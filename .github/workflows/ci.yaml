@@ -40,6 +40,13 @@ jobs:
         path: ~/.cache/pre-commit
         key: ${{ runner.os }}-python-${{ matrix.python-version }}-precommit-${{ hashFiles('.pre-commit-config.yaml') }}
 
+    - name: Check caches
+      run: |
+        ls -l ~/.cache
+        ls -l ~/.cache/pip
+        ls -l ~/.cache/pypoetry
+        ls -l ~/.cache/pre-commit
+
     - name: Setup poetry ${{matrix.poetry-version}}
       run: pip install poetry==${{matrix.poetry-version}}
 
