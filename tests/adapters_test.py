@@ -1,5 +1,7 @@
 from unittest import mock
 
+from hypothesis import given
+
 from adapters import (
     ClearMemoryController,
     EnterNumberController,
@@ -10,13 +12,14 @@ from adapters import (
 )
 
 
-def test_should_call_enter_number_usecase() -> None:
+@given(...)
+def test_should_call_enter_number_usecase(value: float) -> None:
     mocked_usecase = mock.Mock()
     controller = EnterNumberController(mocked_usecase)
 
-    controller(1.0)
+    controller(value)
 
-    mocked_usecase.assert_called_with(1.0)
+    mocked_usecase.assert_called_with(value)
 
 
 def test_should_call_execute_operation_usecase() -> None:
@@ -51,12 +54,12 @@ def test_should_fill_result_on_call() -> None:
 
     assert presenter.result is None
 
-    presenter(operation="add", operands=[1.0, 1.0], result=4.0)
+    presenter(operation="add", operands=[1.0, 1.0], result=2.0)
 
     assert presenter.result is not None
     assert presenter.result.operation == "add"
     assert presenter.result.operands == [1.0, 1.0]
-    assert presenter.result.value == 4.0
+    assert presenter.result.value == 2.0
 
 
 def test_should_fill_memory_on_call() -> None:
