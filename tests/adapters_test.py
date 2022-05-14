@@ -2,7 +2,7 @@ from unittest import mock
 
 from hypothesis import given
 
-from adapters import (
+from py_calc_rpn.adapters import (
     ClearMemoryController,
     EnterNumberController,
     ExecuteOperationController,

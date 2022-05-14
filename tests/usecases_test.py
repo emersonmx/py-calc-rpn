@@ -1,8 +1,8 @@
 from typing import Any
 from unittest import mock
 
-from entities import Stack
-from usecases import (
+from py_calc_rpn.entities import Stack
+from py_calc_rpn.usecases import (
     ClearMemoryInteractor,
     EnterNumberInteractor,
     ExecuteOperationInteractor,

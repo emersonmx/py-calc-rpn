@@ -1,6 +1,6 @@
 import pytest
 
-from entities import EmptyStackError, Number, Stack
+from py_calc_rpn.entities import EmptyStackError, Number, Stack
 
 
 def test_should_raise_error_on_top_when_empty(stack: Stack) -> None:

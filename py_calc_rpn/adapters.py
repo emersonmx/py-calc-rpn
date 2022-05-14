@@ -1,6 +1,6 @@
 from dataclasses import dataclass, field
 
-from usecases import (
+from .usecases import (
     ClearMemory,
     EnterNumber,
     ExecuteOperation,

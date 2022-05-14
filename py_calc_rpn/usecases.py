@@ -1,6 +1,6 @@
 from typing import Protocol
 
-import entities
+from . import entities
 
 
 class EnterNumber(Protocol):

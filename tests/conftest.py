@@ -1,6 +1,6 @@
 import pytest
 
-from entities import Stack
+from py_calc_rpn.entities import Stack
 
 
 @pytest.fixture

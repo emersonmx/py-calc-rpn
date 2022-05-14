@@ -2,7 +2,7 @@ import itertools
 
 import pytest
 
-from entities import Number, OperationError, Result, Stack, add
+from py_calc_rpn.entities import Number, OperationError, Result, Stack, add
 
 DEFAULT_NUMBERS = itertools.product([-5, -1, 0, -1, 5], repeat=2)
 

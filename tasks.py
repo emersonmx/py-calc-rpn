@@ -4,7 +4,7 @@ from invoke import Context, task
 @task
 def run(c, backend="tui"):
     # type: (Context, str) -> None
-    c.run(f"python src/entrypoint/{backend}/main.py", pty=True)
+    c.run(f"python py_calc_rpn/entrypoint/{backend}/main.py", pty=True)
 
 
 @task(aliases=["fmt"])
@@ -68,7 +68,6 @@ def tests(c, quiet=False):
 
     cmd = " ".join(
         [
-            "PYTHONPATH=src/",
             "coverage",
             "run",
             "-m",
