@@ -10,42 +10,6 @@ from usecases import (
 )
 
 
-def make_enter_number_interactor(stack: Stack) -> EnterNumberInteractor:
-    mocked_memory_output = mock.MagicMock()
-    return EnterNumberInteractor(
-        stack,
-        mocked_memory_output,
-    )
-
-
-def make_execute_operation_interactor(
-    stack: Stack,
-) -> ExecuteOperationInteractor:
-    mocked_result_output = mock.MagicMock()
-    mocked_memory_output = mock.MagicMock()
-    return ExecuteOperationInteractor(
-        stack,
-        mocked_result_output,
-        mocked_memory_output,
-    )
-
-
-def make_show_memory_interactor(stack: Stack) -> ShowMemoryInteractor:
-    mocked_memory_output = mock.MagicMock()
-    return ShowMemoryInteractor(
-        stack,
-        mocked_memory_output,
-    )
-
-
-def make_clear_memory_interactor(stack: Stack) -> ClearMemoryInteractor:
-    mocked_memory_output = mock.MagicMock()
-    return ClearMemoryInteractor(
-        stack,
-        mocked_memory_output,
-    )
-
-
 def test_should_enter_a_number(stack: Stack) -> None:
     interactor = make_enter_number_interactor(stack)
     mocked_memory_output: Any = interactor._output_memory
@@ -106,3 +70,39 @@ def test_should_clear_memory(stack: Stack) -> None:
 
     assert stack.size() == 0
     mocked_memory_output.assert_called_with([])
+
+
+def make_enter_number_interactor(stack: Stack) -> EnterNumberInteractor:
+    mocked_memory_output = mock.MagicMock()
+    return EnterNumberInteractor(
+        stack,
+        mocked_memory_output,
+    )
+
+
+def make_execute_operation_interactor(
+    stack: Stack,
+) -> ExecuteOperationInteractor:
+    mocked_result_output = mock.MagicMock()
+    mocked_memory_output = mock.MagicMock()
+    return ExecuteOperationInteractor(
+        stack,
+        mocked_result_output,
+        mocked_memory_output,
+    )
+
+
+def make_show_memory_interactor(stack: Stack) -> ShowMemoryInteractor:
+    mocked_memory_output = mock.MagicMock()
+    return ShowMemoryInteractor(
+        stack,
+        mocked_memory_output,
+    )
+
+
+def make_clear_memory_interactor(stack: Stack) -> ClearMemoryInteractor:
+    mocked_memory_output = mock.MagicMock()
+    return ClearMemoryInteractor(
+        stack,
+        mocked_memory_output,
+    )
