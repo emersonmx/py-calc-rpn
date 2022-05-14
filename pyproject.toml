@@ -77,7 +77,7 @@ min_confidence = 100
 [tool.coverage.run]
 branch = true
 source = ["./"]
-omit = ["py_calc_rpn/**/__main__.py"]
+omit = ["py_calc_rpn/**/__main__.py", "tasks.py", "tests/*.py"]
 
 [tool.coverage.report]
 fail_under = 100
