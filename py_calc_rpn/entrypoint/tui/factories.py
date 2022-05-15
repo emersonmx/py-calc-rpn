@@ -1,5 +1,6 @@
 from py_calc_rpn.adapters import EnterNumberController
 from py_calc_rpn.entrypoint.tui.app import App
+from py_calc_rpn.usecases import EnterNumberInteractor
 
 
 def make_app() -> App:
@@ -12,5 +13,5 @@ def make_enter_number_command():
 
 def make_enter_number_controller():
     return EnterNumberController(
-
+        EnterNumberInteractor()
     )

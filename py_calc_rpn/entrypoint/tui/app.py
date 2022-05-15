@@ -5,6 +5,7 @@ from py_calc_rpn.entrypoint.tui.exceptions import InvalidCommandError
 class App:
     def __init__(self) -> None:
         self.running = True
+        self.user_input = ""
 
     def run(self) -> None:
         self._show_init_help()
@@ -18,14 +19,14 @@ class App:
         print("Press Ctrl-c to quit.")
 
     def _process(self) -> None:
-        user_input = self._get_user_input()
-        command = self._get_command(user_input)
-        print(command())
+        self.user_input = self._get_user_input()
+        command = self._get_command()
+        command(self.user_input)
 
     def _get_user_input(self) -> str:
         return input("> ")
 
-    def _get_command(self, user_input: str) -> Command:
+    def _get_command(self) -> Command:
         # A number
         # + or add
         # - or subtract
@@ -35,4 +36,4 @@ class App:
         # clear
         # quit
         # help
-        raise InvalidCommandError(user_input)
+        raise InvalidCommandError(self.user_input)
