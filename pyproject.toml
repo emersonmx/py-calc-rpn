@@ -22,7 +22,7 @@ pytest = "^7.1.2"
 hypothesis = "^6.46.3"
 coverage = "^6.3.2"
 ipdb = "^0.13.9"
-invoke = "^1.7.0"
+invoke = "^1.7.1"
 pre-commit = "^2.18.1"
 
 [build-system]
