@@ -15,26 +15,20 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      - name: Install poetry ${{matrix.poetry-version}}
+        run: pipx install poetry
+
       - name: Setup Python ${{ matrix.python-version }}
         uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.python-version }}
           cache: poetry
 
-      - name: Setup pip cache
-        uses: actions/cache@v3
-        with:
-          path: ~/.cache/pip
-          key: ${{ runner.os }}-python-${{ matrix.python-version }}-pip
-
       - name: Setup pre-commit cache
         uses: actions/cache@v3
         with:
           path: ~/.cache/pre-commit
           key: ${{ runner.os }}-python-${{ matrix.python-version }}-precommit-${{ hashFiles('.pre-commit-config.yaml') }}
-
-      - name: Setup poetry ${{matrix.poetry-version}}
-        run: pip install poetry==${{matrix.poetry-version}}
 
       - name: Install dependencies
         run: |
